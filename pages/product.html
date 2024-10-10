@@ -1,0 +1,209 @@
+
+
+<div id="product-page" class="product-page fullwdt">
+    <div class="produto-wrapper" itemscope itemtype="http://schema.org/Product">  
+        {% if utils.is_mobile %}
+            {% element 'snippets/breadcrumb' %}
+        {% endif %}
+        <section class="product__general-information">
+                <!-- <div class="product__offer">
+                    {# {% set percent = 100 - ( product.price_offer / product.price ) * 100 %} #}
+                    {# <span>-{{ percent|number_format }}%</span> #}
+                </div> -->
+                <div class="product-img" id="visualBlock">
+                    {% if product.images %}
+                            {% if product.images[0] %}
+                                <img itemprop="image"  data-original="{{ product.images[0].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[1] %}
+                                <img itemprop="image"  data-original="{{ product.images[1].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[2] %}
+                                <img itemprop="image"  data-original="{{ product.images[2].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[3] %}
+                                <img itemprop="image"  data-original="{{ product.images[3].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[4] %}
+                                <img itemprop="image"  data-original="{{ product.images[4].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[5] %}
+                                <img itemprop="image"  data-original="{{ product.images[5].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[6] %}
+                                <img itemprop="image"  data-original="{{ product.images[6].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[7] %}
+                                <img itemprop="image"  data-original="{{ product.images[7].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[8] %}
+                                <img itemprop="image"  data-original="{{ product.images[8].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[9] %}
+                                <img itemprop="image"  data-original="{{ product.images[9].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[10] %}
+                                <img itemprop="image"  data-original="{{ product.images[10].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[11] %}
+                                <img itemprop="image"  data-original="{{ product.images[11].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[12] %}
+                                <img itemprop="image"  data-original="{{ product.images[12].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[13] %}
+                                <img itemprop="image"  data-original="{{ product.images[13].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[14] %}
+                                <img itemprop="image"  data-original="{{ product.images[14].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                            {% if product.images[15] %}
+                                <img itemprop="image"  data-original="{{ product.images[15].full }}" class="lazy product-img_wdt" src="{{ asset('img/loading.svg') }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            {% endif %}
+                    {% else %}
+                        <img src="{{ asset('img/no-image.svg') }}" alt="Nenhuma imagem foi cadastrada" width="100" title="{{ product.name }}">
+                    {% endif %}
+                </div>
+        </section>
+        <section class="product__general-price-information price-shipping__block-bottom">
+            <div class="price-shipping__block">
+                <header>
+                    <div class="brand-rating-block">
+                        <div class="product-info__item hidden-xs hidden-sm"><span class="product-info__desc">{{ product.brand }}</span></div>
+                    </div>
+                    <h1 class="product__name">{{ product.name }}</h1>
+                    <!-- <ul class="product-info__list">
+                        <li class="product-info__item">
+                            <span class="product-info__title">SKU:</span>
+                            <span class="product-info__desc">{{ product.id }}</span>
+                        </li>
+                    </ul> -->
+                    <form id="form_comprar" method="post" data-app="product.buy-form" action="{{ links.cart_add ~ product.id }}">
+                        {{ productHelper.pricing(price) }}
+                        
+                        {% if product.available and product.stock > 0  %}
+                        <div class="labels labels-product">
+                            {% if product.new %}
+                                {% if Image('new') %}
+                                    <span class="botao-new">{{ Image('new') }}</span>
+                                {% else %}
+                                    <span class="label new"> Oferta</span>
+                                {% endif %}
+                            {% endif %}
+        
+                            {% if product.featured %}
+                                {% if Image('featured') %}
+                                    <span class="featured">{{ Image('featured') }}</span>
+                                {% else %}
+                                    <span class="label featured">Lançamento</span>
+                                {% endif %}
+                            {% endif %}
+        
+                            {% if product.additional_button %}
+                                {% if Image('additional_button') %}
+                                    <span class="free-shipping ">{{ Image('additional_button') }}</span>
+                                    {% else %}
+                                    <span class="label free-shipping">SALE</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                        <div class="product__variations">
+                            {{ productHelper.variants() }}
+                        </div>
+              
+                        {# {{ product.additional_information }} #}
+                        {% if not product.upon_request or product.stock != 0 or product.available == 0 %}
+                            <span id="span_erro_carrinho" class="blocoAlerta" >Favor selecionar uma opção de variação do produto.</span>
+                        {% endif %}
+                        <div class="tray-product-form-wrapper">{{ productHelper.form() }}</div>
+                        <div class="product__kit">{{ productHelper.kit() }}</div>
+                    </form>
+                    {% if productHelper.shipping() %}
+                    <div class="pageProduct-shipping" data-price-hidden="{{settings.hide_price ? 'true' : 'false'}}">
+                        <span class="serverTray-content">{{ productHelper.shipping() }}</span>
+                        <form class="shipping-form" data-shipping="form">
+                            <label for="cep" class="shipping-label">CEP</label>
+                            <input class="shipping-input mask-cep" id="cep" name="calcule o frete" type="text" minlength="9" maxlength="9" placeholder="Informe seu CEP" required />
+                            <button type="submit" class="shipping-submit button2">Consultar</button>
+                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" rel="noopner" target="_blank" class="shipping-help">N&atilde;o sei meu CEP</a>
+                        </form>
+                        <div class="shipping-result loaded" data-shipping="result">
+                            <p class="shipping-loading">Carregando fretes...</p>
+                        </div>
+                    </div>
+                {% endif %}
+                    {% element 'snippets/brands_list' %}
+                    {% element 'snippets/banner-regua-fio' %}
+                    
+                    
+                </header>
+                {{ productHelper.gifts() }}
+   
+                
+                <div class="social-midias">{{ productHelper.social() }}</div>
+            </div>
+        </section>
+
+<div class=" maxdth">
+    <section id="ProdBlock" class="product__tabs ">
+        <a name="formaPagto"></a>
+        <div id="descricao" class="prodBox dispblock drop">
+            <div class="board">
+                <h3 class="triger_btn-tabs">{{ productTabs.description.description }}<svg class="cat__icon icon--arrow-bottom "><use xlink:href="#icon-arrow-bottom"></use></svg></h3>
+                <div class="board_htm description tabs_wrap">
+                    {{ product.description ? product.description : product.description_small }}
+                </div>
+            </div>
+        </div>
+        <div id="coments" class="prodBox dispblock ">
+            <h3 class="triger_btn-tabs">{{ productTabs.comments.description }}<svg class="cat__icon icon--arrow-bottom "><use xlink:href="#icon-arrow-bottom"></use></svg></h3>
+            <div class="board tabs_wrap">{% element 'product/comments' %}</div>
+        </div>
+        <div id="coments" class="prodBox {{productTabs.custom.description }}">
+            <h3 class="triger_btn-tabs">{{ productTabs.AdditionalTab8.description }}<svg class="cat__icon icon--arrow-bottom "><use xlink:href="#icon-arrow-bottom"></use></svg></h3>
+            <div class="board ">
+                {{ productTabs.custom.content }}
+            </div>
+        </div>
+        {{ productTabs.downloads.content }}
+        <div data-app="product.payment-methods" id="formasPagto" class="prodBox dispblock" style="display:none;"></div>
+    </section>
+     </div>
+</div>
+
+{% if product.related_products and settings.enable_related_products %}
+    <div class="section-product-related">
+        <div class="container">
+
+            <div class="section-header">
+                <h2 class="title-section">
+                    Produtos relacionados
+                </h2>
+            </div>
+            <div class="swiper-container hide-dots-desk">
+                <div class="list-product swiper-wrapper">
+
+                    {% for item in product.related_products %}
+                        <div class="item swiper-slide">
+                            {% element 'snippets/product' {
+                                'product' : item,
+                                'slide'   : true
+                            } %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="prev">
+                    <i class="icon icon-arrow-left"></i>
+                </div>
+                <div class="next">
+                    <i class="icon icon-arrow-right"></i>
+                </div>
+                <div class="dots"></div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}
+</div>

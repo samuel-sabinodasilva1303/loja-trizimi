@@ -1,0 +1,88 @@
+<div class="catalog-cols flex f-wrap">
+    <div class="catalog-main">
+        <span class="catalog-main--name">{{category.name}}</span>
+        <span class="catalog-main--description">{{category.small_description}}</span>
+    </div>
+    {% element 'snippets/breadcrumb' %}
+    <div class="col-content">
+
+        <div class="catalog-header">
+            <div class="catalog-info flex justify-between align-center f-wrap">
+
+                <h1 class="catalog-name">
+                    {{ category.name }}
+                </h1>
+
+                {% if products | length > 0 %}
+
+            
+
+                    <div class="system-filter flex justify-center align-center {% if settings.compare %} compare-true {% endif %}">
+
+                        <div class="sort-mobile">
+                            <div class="sort-mobile-button" data-toggle="overlay-shadow" data-target="#sort-panel">
+                                <i class="icon icon-sort"></i>
+                                Ordenar
+                            </div>
+                            <div id="sort-panel" class="sort-panel">
+
+                                <div class="close-box close-overlay">
+                                    <i class="icon icon-times"></i>
+                                </div>
+
+                                <div class="block-title flex align-center">
+                                    <i class="icon icon-sort"></i>
+                                    Ordenar Produtos
+                                </div>
+
+                                <ul class="sort-options"></ul>
+
+                            </div>
+                        </div>
+
+                        {% element 'snippets/filter' %}
+
+                    </div>
+
+                    {% if settings.compare %}
+                        <div class="compare-wrapper">
+                            <a href="/loja/comparador.php?loja={{store.id}}&IdDep={{category.id}}" class="button-compare">
+                                {{ Translation("comparar_produto") }}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% if products | length > 0 %}
+
+            <div class="catalog-content">
+                {% element 'showcase-catalog' {
+                    "products": products
+                } %}
+            </div>
+
+            {% if paginate.params.pageCount > 1 %}
+                <div class="catalog-footer flex justify-between align-center">
+                    <div class="results">
+                        Resultado: {{ paginate.params.count }} produto(s) em {{ paginate.params.pageCount }} p&aacute;gina(s)
+                    </div>
+                    {% element 'snippets/pagination' %}
+                </div>
+            {% endif %}
+
+        {% else %}
+
+            <div class="catalog-empty">
+                {{ Translation('nenhum_resultado') }} :(
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

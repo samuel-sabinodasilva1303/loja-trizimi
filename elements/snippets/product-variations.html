@@ -1,0 +1,145 @@
+<div class="product-price">
+    {% if product.available and (product.stock > 0) and not product.upon_request %}
+        {% if product.has_variation %}
+            {% set options = [] %}
+            {% set variations = { 'var1': {}, 'var2': {} } %}
+            {% set aux = [] %}
+            {% set types = [] %}
+
+            {% for option in product.variants %}
+                {% set isDouble = false %}
+
+                {% set mainVar = "" %}
+
+                {% if option.Sku|length > 1 %}
+                    {% set isDouble = true %}
+                {% endif %}
+
+                {% for key, variation in option.Sku %}
+                    {% if isDouble %}
+                        {% if key == 0 %}
+                            {% set mainVar = variation.value %}
+                            {% set mainUrl = variation.image_secure %}
+                        {% else %}
+                            {% set nameEncoded = mainVar ~ ' + ' ~ variation.value %}
+
+                            {% if mainUrl != '' %}
+                                {% set options = options|merge([{ 'name': nameEncoded | url_encode, 'id': option.id, 'stock': option.stock, 'url': mainUrl }]) %}
+                            {% else %}
+                                {% set options = options|merge([{ 'name': nameEncoded | url_encode, 'id': option.id, 'stock': option.stock, 'url': variation.image_secure }]) %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if variation.type not in types %}
+                            {% set types = types|merge([variation.type]) %}
+                        {% endif %}
+
+                        {% if variation.value not in aux %}
+                            {% set aux = aux|merge([variation.value]) %}
+
+                            {% if variation.type == types[0] %}
+                                {% set variations = variations|merge({ 'var1': variations.var1|merge([{ 'name': variation.value, 'url': variation.image_secure }]) }) %}
+                            {% else %}
+                                {% set variations = variations|merge({ 'var2': variations.var2|merge([{ 'name': variation.value, 'url': variation.image_secure }]) }) %}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% set variations = variations|merge({ 'var1': variations.var1|merge([{ 'name': variation.value, 'url': variation.image_secure, 'id': option.id }]) }) %}
+
+                        {% set options = options|merge([{ 'name': variation.value, 'id': option.id, 'stock': option.stock, 'url': variation.image_secure }]) %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            <script data-options type="application/json">{{ options|json_encode }}</script>
+        {% endif %}
+
+            <div class="containerVariants">
+                <div class="product-variations">
+                    {% for filteredVar in variations %}
+                        {% if filteredVar[0].url != '' and filteredVar|length >= 6 %}
+                            <div class="slides-buttonPrev--productvariant {{ refShowcase }}">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.475 14.4751C8.3375 14.3376 8.2655 14.1626 8.259 13.9501C8.253 13.7376 8.31875 13.5626 8.45625 13.4251L12.1312 9.7501H3.75C3.5375 9.7501 3.35925 9.6781 3.21525 9.5341C3.07175 9.3906 3 9.2126 3 9.0001C3 8.7876 3.07175 8.60935 3.21525 8.46535C3.35925 8.32185 3.5375 8.2501 3.75 8.2501H12.1312L8.45625 4.5751C8.31875 4.4376 8.253 4.2626 8.259 4.0501C8.2655 3.8376 8.3375 3.6626 8.475 3.5251C8.6125 3.3876 8.7875 3.31885 9 3.31885C9.2125 3.31885 9.3875 3.3876 9.525 3.5251L14.475 8.4751C14.55 8.5376 14.6033 8.6156 14.6348 8.7091C14.6658 8.8031 14.6813 8.9001 14.6813 9.0001C14.6813 9.1001 14.6658 9.19385 14.6348 9.28135C14.6033 9.36885 14.55 9.4501 14.475 9.5251L9.525 14.4751C9.3875 14.6126 9.2125 14.6813 9 14.6813C8.7875 14.6813 8.6125 14.6126 8.475 14.4751Z" fill="black"/>
+                                </svg>
+                            </div>
+
+                            <div class="slides-buttonNext--productvariant {{ refShowcase }}">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.475 14.4751C8.3375 14.3376 8.2655 14.1626 8.259 13.9501C8.253 13.7376 8.31875 13.5626 8.45625 13.4251L12.1312 9.7501H3.75C3.5375 9.7501 3.35925 9.6781 3.21525 9.5341C3.07175 9.3906 3 9.2126 3 9.0001C3 8.7876 3.07175 8.60935 3.21525 8.46535C3.35925 8.32185 3.5375 8.2501 3.75 8.2501H12.1312L8.45625 4.5751C8.31875 4.4376 8.253 4.2626 8.259 4.0501C8.2655 3.8376 8.3375 3.6626 8.475 3.5251C8.6125 3.3876 8.7875 3.31885 9 3.31885C9.2125 3.31885 9.3875 3.3876 9.525 3.5251L14.475 8.4751C14.55 8.5376 14.6033 8.6156 14.6348 8.7091C14.6658 8.8031 14.6813 8.9001 14.6813 9.0001C14.6813 9.1001 14.6658 9.19385 14.6348 9.28135C14.6033 9.36885 14.55 9.4501 14.475 9.5251L9.525 14.4751C9.3875 14.6126 9.2125 14.6813 9 14.6813C8.7875 14.6813 8.6125 14.6126 8.475 14.4751Z" fill="black"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                        {% if filteredVar[0].url != '' %}
+                            <div class="product-variations-color swiper-container {{filteredVar|length >= 6 ? 'carrossel' : ''}}">
+                                <ul class="product-variations-colors-content {{ loop.index == 1 ? 'primary' : 'secondary' }} {{filteredVar|length >= 6 ? 'swiper-wrapper' : ''}}" >
+                                    {% for var in filteredVar %}
+                                        <li data-value="{{ var.name }}" {{ var.id ? 'data-id="' ~ var.id ~ '"' : '' }}  class="product-variations-colors-picture swiper-slide">
+                                            <img class="product-variations-colors-img" src="{{ var.url }}">
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if filteredVar[0].name and not filteredVar[0].url != '' %}
+                            <div class="product-variations-fake-content {{ loop.index == 1 ? 'primary' : 'secondary' }}">
+                                <span class="product-variations-fake-title">
+                                    <span class="product-variations-fake-change"></span>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 11 3 3 3-3"></path>
+                                    </svg>
+                                </span>
+
+                                <ul class="product-variations-fake-select" data-order="{{loop.index}}">
+                                    {% for var in filteredVar %}
+                                        <li class="product-variations-fake-option" {{ var.id ? 'data-id="' ~ var.id ~ '"' : '' }} data-value="{{ var.name }}">{{ var.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="error-variants"></div>
+                </div>
+            </div>
+            <a class="product-info" href="{{ product.link }}">
+                <div class="product-name">
+                    {{ product.name }}
+                </div>
+        
+                    {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                        {% element 'snippets/product-price' { 'product': product } %}
+                    {% endif %}
+                
+            </a>
+            {% if not product.is_kit %}
+                <div class="product__buttons actions">
+                    <button
+                        class="product__button product-button"
+                        data-id="{{ product.id }}"
+                        data-variant="{{ product.variants[0] ? '' : 0 }}"
+                        data-type="cart.addProduct"
+                        id="quant"
+                        type="submit">
+                        COMPRAR
+                    </button>
+                </div>
+
+            {% endif %}
+    {% endif %}
+
+
+    {% if product.is_kit %}
+        <div class="container__Kit">
+            <a href="{{ product.link }}">
+                <button
+                class="product__button__kit"
+
+                type="submit">
+                Ver Kit
+            </button>
+            </a>
+        </div>
+
+    {% endif %}
+</div>
