@@ -11468,10 +11468,12 @@ input[size] {
 
 /* line 2278, src/assets/css/_default.scss */
 .title-store {
-  font-size: 3rem;
-  font-weight: 400;
+  font-size: 5rem;
+  font-weight: 705;
   text-align: center;
   color: #000;
+  font-family: 'Cooper Hewitt', sans-serif;
+
 }
 
 /* line 2284, src/assets/css/_default.scss */
@@ -11954,7 +11956,8 @@ body.overflowed {
 /* line 2806, src/assets/css/_default.scss */
 .section-header .title-section {
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 300;
+  text-transform: uppercase;
   text-align: center;
   color: var(--color_font_dark); }
 
@@ -19931,7 +19934,6 @@ button.minicart__close--footer {
   flex-direction: column;
   width: 100%;
   padding:70px;
-  background: #e9f0f0;
 }
 .catalog-main--name{
   font-size: 120px;
