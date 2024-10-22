@@ -25,7 +25,7 @@
 
         {% element 'snippets/product-tags' { 'product': product } %}
     </div>
-    {% if product.available and (product.stock > 0) and not product.upon_reques  %}
+    {% if  product.has_variation  %}
         {% element 'snippets/product-variations' {'product': product } %}
     {% endif %}
 
@@ -37,7 +37,7 @@
             </div>
         </a>
 
-        {% element 'snippets/product-message' { 'product_message': '', 'know_more' : 'Para mais informações acesse' } %}
+        {% element 'snippets/product-message' { 'product_message': '', 'know_more' : 'Para saber mais acesse' } %}
     {% elseif product.stock == 0 %}
         <a class="product-info" href="{{ product.link }}">
 
@@ -45,7 +45,32 @@
                 {{ product.name }}
             </div>
         </a>
-        {% element 'snippets/product-message' {  'product_message': '', 'know_more' : 'Para mais informações acesse' } %}
+        {% element 'snippets/product-message' {  'product_message': '', 'know_more' : 'Para saber mais acesse' } %}
     {% endif %}
+    
+    {% if pages.current == 'catalog' and not product.has_variation %}
+        <a class="product-info" href="{{ product.link }}">
+            <div class="product-name">
+                {{ product.name }}
+            </div>
 
+            <div class="product-price">
+                {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                    {% element 'snippets/product-price' { 'product': product } %}
+                {% elseif product.upon_request %}
+                    {% element 'snippets/product-message' { 'product_message': 'Sob consulta', 'know_more' : 'Saiba mais' } %}
+                {% elseif product.stock <= 0 %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indispon�vel' } %}
+                {% else %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indispon�vel'  } %}
+                {% endif %}
+            </div>
+        </a>
+
+        <div class="actions">
+            {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                <a class="product-button" href="{{ product.link }}">Comprar</a>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>

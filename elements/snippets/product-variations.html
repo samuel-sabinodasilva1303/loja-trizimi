@@ -75,7 +75,10 @@
                                 <ul class="product-variations-colors-content {{ loop.index == 1 ? 'primary' : 'secondary' }} {{filteredVar|length >= 6 ? 'swiper-wrapper' : ''}}" >
                                     {% for var in filteredVar %}
                                         <li data-value="{{ var.name }}" {{ var.id ? 'data-id="' ~ var.id ~ '"' : '' }}  class="product-variations-colors-picture swiper-slide">
-                                            <img class="product-variations-colors-img" src="{{ var.url }}">
+
+                                                {% for imagemVariant in product.variants %}
+                                                    <img class="product-variations-colors-img" src="{{ imagemVariant.images[0].small }}" data-image-number="{{ loop.index }}">
+                                                {% endfor %}
                                         </li>
                                     {% endfor %}
                                 </ul>

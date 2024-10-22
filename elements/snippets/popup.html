@@ -11,14 +11,21 @@
         </div> 
           
           <div class="pop-up__text-img">
-            <img src="{{ asset('img/imagem_newsletter.jpeg') }}" alt="imagem newsletter">
+            {% if utils.is_mobile %}
+              <div style=" width: 100%; height: 250px; overflow: hidden; ">
+            {% endif %}
+              <img src="{{ asset('img/imagem_newsletter.jpeg') }}" alt="imagem newsletter">
+            {% if utils.is_mobile %}
+              </div>
+            {% endif %}
             <form method="POST" action="/mvc/store/newsletter/" name="newsletter" data-tray-tst="newsletter_form" class="text__form">
               <div class="textContent">
                 <strong class="text__title">Seja Bem-Vinda</strong>
-                <strong class="text__subtitle">Cadastre-se para receber as novidades e ganhe <span>frete grátis para todo Brasil em sua primeira compra!</span></strong>
+                <strong class="text__subtitle">Cadastre-se para receber as novidades e ganhe 10% de desconto em sua primeira compra utilizando o cupom <span>TRIZIMI10</span></strong>
               </div> 
               <input type="text" name="name" placeholder="Nome" class="text__input" required>
               <input type="email" name="email" placeholder="E-mail" data-tray-tst="newsletter_email" class="text__input" required>
+              <input type="tel" name="phone" placeholder="Telefone" data-tray-tst="newsletter_phone" class="text__input" required>
               <div class="btnSty">
                 <button type="submit" data-tray-tst="newsletter_cadastrar" class="text__button" >
                     Enviar            

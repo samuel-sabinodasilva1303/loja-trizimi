@@ -110,12 +110,26 @@
                     {% endif %}
                         <div class="product__variations">
                             {{ productHelper.variants() }}
+                            <div class="imagens_variantes" style="display: none;">
+                                {% set displayed_ids = [] %}
+                            
+                                {% for productVariants in product.variants %}
+                                    {% for productColor in productVariants.Cor %}
+                                        {% for productSku in productColor.sku %}
+                                            {% for productImagem in productSku %}
+                                                {% if productImagem.color_id_1 is defined and productImagem.color_id_1 not in displayed_ids %}
+                                                        <img class="return_imagem" id="cor_{{ productImagem.color_id_1 }}" src="{{ productImagem.images[0].small }}" alt="Cor {{ productImagem.color_id_1 }}">
+                                                    {% set displayed_ids = displayed_ids|merge([productImagem.color_id_1]) %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
                         </div>
               
                         {# {{ product.additional_information }} #}
-                        {% if not product.upon_request or product.stock != 0 or product.available == 0 %}
-                            <span id="span_erro_carrinho" class="blocoAlerta" >Favor selecionar uma opção de variação do produto.</span>
-                        {% endif %}
+                   
                         <div class="tray-product-form-wrapper">{{ productHelper.form() }}</div>
                         <div class="product__kit">{{ productHelper.kit() }}</div>
                     </form>
