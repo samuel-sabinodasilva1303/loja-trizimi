@@ -548,7 +548,7 @@
                     resultBox
                         .addClass('loaded')
                         .html(
-                            `<p class="error-block">Por favor, selecione as varia&ccedil;&otilde;es antes de calcular o frete.</p>`
+                            `<p class="error-block">Selecione um tamanho/cor para calcular o frete</p>`
                         );
                     return;
                 }
@@ -2431,6 +2431,12 @@
         const imageNumbersToKeep = [1, 4, 7, 10];
 
         $('.product').each(function() { 
+            var firstVariants = $(this).find('.product-variations-colors-content.primary').length
+            var secondVariants = $(this).find('.product-variations-fake-content.secondary').length
+
+            if(firstVariants <= 0 || secondVariants > 0 ){
+                $(this).find('.product-variations').css("background", "")
+            }
             $(this).find('.product-variations-colors-picture').each(function(index) {
                 const imageNumberToKeep = imageNumbersToKeep[index];
     
@@ -2475,4 +2481,52 @@
         });
   
     }, 1500)
+    $('.product').each(function() { 
+        var hasSecondaryVariants = $(this).find('.product-variations-fake-content.secondary').length > 0;
+    
+        if (!hasSecondaryVariants) {
+            $(this).find('.product-variations').css({"height": "45px", "padding": "0"});
+            $(this).find('.containerVariants').css("top", "-1em")
+            $(this).find('.product-variations-fake-select').css("margin-top","-11px")
+    
+        }
+    });
+    const productElement = document.querySelector('[data-pages="product"]');
+    
+    if (productElement) {
+        if (window.innerWidth <= 768) {
+            const listaCorVariacao = document.querySelector('.lista_cor_variacao');
+            
+            if (listaCorVariacao) {
+                // Adiciona a classe Swiper
+                listaCorVariacao.classList.add('swiper-wrapper');
+
+                // Armazena os itens da lista em um array
+                const items = Array.from(listaCorVariacao.children);
+                listaCorVariacao.innerHTML = ''; // Limpa a lista original
+
+                items.forEach(item => {
+                    // Envolve cada item em uma div swiper-slide
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('swiper-slide');
+                    wrapper.appendChild(item.cloneNode(true)); // Clona o item para não removê-lo
+                    listaCorVariacao.appendChild(wrapper);
+                });
+
+                // Inicializa o Swiper
+                const swiper = new Swiper('.lista_cor_variacao', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            }
+        }
+    }
 })(jQuery);

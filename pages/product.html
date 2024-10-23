@@ -108,7 +108,7 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                        <div class="product__variations">
+                        <div class="product__variations" data-pages="{{pages.current}}">
                             {{ productHelper.variants() }}
                             <div class="imagens_variantes" style="display: none;">
                                 {% set displayed_ids = [] %}

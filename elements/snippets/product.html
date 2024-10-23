@@ -25,7 +25,7 @@
 
         {% element 'snippets/product-tags' { 'product': product } %}
     </div>
-    {% if  product.has_variation  %}
+    {% if  product.has_variation and product.stock != 0  %}
         {% element 'snippets/product-variations' {'product': product } %}
     {% endif %}
 
