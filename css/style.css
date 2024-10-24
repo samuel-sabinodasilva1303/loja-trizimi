@@ -9475,7 +9475,10 @@ li.social-list_items.whatsapp:hover i {
 
 /* line 187, src/assets/css/_default.scss */
 .icon-facebook::before {
-  content: "\ea09"; }
+  content: "\ea09"; 
+  color: var(--color_footer_highlight);
+  font-size: 30px;
+}
 
 /* line 191, src/assets/css/_default.scss */
 .icon-favorite::before {
@@ -9487,7 +9490,10 @@ li.social-list_items.whatsapp:hover i {
 
 /* line 199, src/assets/css/_default.scss */
 .icon-instagram::before {
-  content: "\ea0c"; }
+  content: "\ea0c"; 
+  color: var(--color_footer_highlight);
+  font-size: 30px;
+}
 
 /* line 203, src/assets/css/_default.scss */
 .icon-login::before {
@@ -12453,7 +12459,9 @@ header .header-search-wrapper .input-search::placeholder {
 .header .cart-toggle:hover {
   opacity: .8; }
 
+
 @media (min-width: 768px) {
+
   /* line 3305, src/assets/css/_default.scss */
   .header:not(.fixed) .line {
     border-bottom: 2px solid var(--color_header_details); }
@@ -12470,9 +12478,6 @@ header .header-search-wrapper .input-search::placeholder {
     z-index: 10;
     top: 0;
     transition: ease-out 0.3s; }
-  /* line 3325, src/assets/css/_default.scss */
-  .header .logo {
-    margin-right: 1.875rem; }
   /* line 3329, src/assets/css/_default.scss */
   .header .logo svg,
   .header .logo img {
@@ -12481,7 +12486,7 @@ header .header-search-wrapper .input-search::placeholder {
     transition: ease-out 0.3s; }
   /* line 3336, src/assets/css/_default.scss */
   .header .header-search-wrapper {
-    max-width: 600px;
+    max-width: 530px;
   }
   /* line 3341, src/assets/css/_default.scss */
   .header.fixed {
@@ -12499,8 +12504,27 @@ header .header-search-wrapper .input-search::placeholder {
   .header.fixed .logo img {
     max-height: 56px;
     transition: ease-out 0.3s 0.3s; } }
+  .redes-sociais--mobile--face{
+    margin-top: -2px;
+    position: relative;
+    left: 40px;
 
+  }
 @media (max-width: 767px) {
+  .icon-instagram::before, .icon-facebook::before{
+    font-size: 23px;
+    margin-right: 10px;
+  }
+
+  .redes-sociais--mobile--face{
+    margin-top: -3px;
+    width: 25px;
+    left: 0;
+  }
+  .redes-sociais--mobile{
+    margin-left: 5px;
+  }
+
   /* line 3364, src/assets/css/_default.scss */
   .header-menu {
     display: flex;

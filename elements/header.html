@@ -31,6 +31,17 @@
             <a class="logo" href="{{ store.url }}" title="{{ store.name }}">
                 <h1 class="title-store">{{ store.name }}</h1>
             </a>
+            {% if settings.facebook_profile %}
+                <a class="redes-sociais--mobile--face" href="{{ settings.facebook_profile }}" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                    <i class="icon icon-facebook v-align-middle"></i>
+                </a>
+            {% endif %}
+
+            {% if settings.instagram_profile %}
+                <a class="redes-sociais--mobile" href="{{ settings.instagram_profile }}" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                    <i class="icon icon-instagram v-align-middle"></i>
+                </a>
+            {% endif %}
             {% if utils.is_mobile %}
                 {% element 'snippets/minicart-preview' %}
             {% endif %}
