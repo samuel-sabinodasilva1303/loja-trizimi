@@ -2529,4 +2529,21 @@
             }
         }
     }
+    var textoVariacao = $('#menuVars .texto_variacao h2').text();
+
+    if (textoVariacao === "Escolha Tamanho") {
+        $('#menuVars .lista_cor_variacao li').addClass('active-size');
+        $("#menuVars .lista_cor_variacao .swiper-slide").css("width", "40px");
+        $(".lista_cor_variacao .cor_selecionada").css({
+            "border": "none",
+            "height": "40px",
+            "width": "40px",
+            "display": "flex",
+            "justify-content": "center",
+            "align-items": "center"
+        });
+    } else {
+        $("#menuVars .lista_cor_variacao .swiper-slide").css("width", "80px");
+    }
+    
 })(jQuery);

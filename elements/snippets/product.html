@@ -37,7 +37,7 @@
             </div>
         </a>
 
-        {% element 'snippets/product-message' { 'product_message': '', 'know_more' : 'Para saber mais acesse' } %}
+        {% element 'snippets/product-message' { 'product_message': 'Esse acabou :(','know_more' : 'Produto indisponível' } %}
     {% elseif product.stock == 0 %}
         <a class="product-info" href="{{ product.link }}">
 
@@ -45,7 +45,7 @@
                 {{ product.name }}
             </div>
         </a>
-        {% element 'snippets/product-message' {  'product_message': '', 'know_more' : 'Para saber mais acesse' } %}
+        {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indisponível' } %}
     {% endif %}
     
     {% if pages.current == 'catalog' and not product.has_variation and product.stock <= 0  and product.upon_request %}
