@@ -48,7 +48,7 @@
         {% element 'snippets/product-message' {  'product_message': '', 'know_more' : 'Para saber mais acesse' } %}
     {% endif %}
     
-    {% if pages.current == 'catalog' and not product.has_variation %}
+    {% if pages.current == 'catalog' and not product.has_variation and product.stock <= 0  and product.upon_request %}
         <a class="product-info" href="{{ product.link }}">
             <div class="product-name">
                 {{ product.name }}
@@ -60,9 +60,35 @@
                 {% elseif product.upon_request %}
                     {% element 'snippets/product-message' { 'product_message': 'Sob consulta', 'know_more' : 'Saiba mais' } %}
                 {% elseif product.stock <= 0 %}
-                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indispon�vel' } %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indisponível' } %}
                 {% else %}
-                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indispon�vel'  } %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indisponível'  } %}
+                {% endif %}
+            </div>
+        </a>
+
+        <div class="actions">
+            {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                <a class="product-button" href="{{ product.link }}">Comprar</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if pages.current == 'catalog' and not product.has_variation and product.stock > 0  and not product.upon_request %}
+        <a class="product-info" href="{{ product.link }}">
+            <div class="product-name">
+                {{ product.name }}
+            </div>
+
+            <div class="product-price">
+                {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                    {% element 'snippets/product-price' { 'product': product } %}
+                {% elseif product.upon_request %}
+                    {% element 'snippets/product-message' { 'product_message': 'Sob consulta', 'know_more' : 'Saiba mais' } %}
+                {% elseif product.stock <= 0 %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indisponível' } %}
+                {% else %}
+                    {% element 'snippets/product-message' {  'product_message': 'Esse acabou :(', 'know_more' : 'Produto indisponível'  } %}
                 {% endif %}
             </div>
         </a>

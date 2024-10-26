@@ -37,12 +37,7 @@
     <div class="cols">
         <div class="container flex justify-between f-wrap">
 
-            <div class="box logo-box">
-
-                {% set logoStore = Image('logo_loja') %}
-                <a class="logo" href="{{ store.url }}" title="{{ store.name }}">
-                    <h1 class="title-store">{{ store.name }}</h1>
-                </a>
+            <div class="box logo-box footer">
 
                 <div class="social-media flex align-center">
                     {% element 'snippets/social-media' %}
@@ -154,7 +149,7 @@
                 <div class="text">
                     {% set logoStore = Image('logo_loja') %}
                     <a class="logo" href="{{ store.url }}" title="{{ store.name }}">
-                        <h1 class="title-store">{{ store.name }}</h1>
+                        <h1 class="title-store footer">{{ store.name }}</h1>
                     </a>
                 </div>
                 <span class="copyright">

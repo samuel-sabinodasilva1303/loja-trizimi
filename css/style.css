@@ -3941,6 +3941,7 @@ section.product {
       #product-page .lista_cor_variacao {
         width: 100%;
         flex-wrap: nowrap;
+        margin-top: 3em;
         gap: 1em;
         } }
     /* line 78, src/assets/css/elements/product/_products_default.scss */
@@ -12510,6 +12511,14 @@ header .header-search-wrapper .input-search::placeholder {
     left: 40px;
 
   }
+  .title-store.footer{
+    font-size: 3rem;
+    color: #000;
+    font-family: 'Cooper Hewitt', sans-serif;
+  }
+  .box.logo-box.footer{
+    display: flex;
+  }
 @media (max-width: 767px) {
   .icon-instagram::before, .icon-facebook::before{
     font-size: 23px;
@@ -12980,7 +12989,7 @@ header .header-search-wrapper .input-search::placeholder {
 /* banner regua fio */
 /* line 3856, src/assets/css/_default.scss */
 .regua-fio {
-  padding: 1.875rem 0; }
+  padding: 2.875rem 0; }
 
 /* line 3860, src/assets/css/_default.scss */
 .regua-fio-wrapper {
@@ -19494,13 +19503,31 @@ div#nao_disp::before {
 
 }
 .price-shipping__block header #form_comprar .product__variations #show_size_and_color_main_type #menuVars .lista_cor_variacao li{
-  width: auto;
-  height: auto;
-  border: none;
+  align-items: center;
+  border: 1px solid rgb(146, 144, 144);
+  border-radius: 10%;
+  color: rgb(146, 144, 144);
+  display: flex;
+  font-size: 17px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  margin-right: 7px;
+  transition: all .5s;
+  width: 40px;
 }
 .price-shipping__block header #form_comprar .product__variations #show_size_and_color_main_type #menuVars .lista_cor_variacao li .cor_selecionada{
-  width: auto;
-  height: auto;
+  align-items: center;
+  border: 1px solid rgb(146, 144, 144);
+  border-radius: 10%;
+  color: rgb(146, 144, 144);
+  display: flex;
+  font-size: 17px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  transition: all .5s;
+  width: 40px;
 }
 #form_comprar .product__variations #show_size_and_color_main_type #menuVars .lista_cor_variacao li .cor_selecionada{
   width: 23px;
