@@ -2428,29 +2428,20 @@
         $('.color_variant').eq(index).attr('src', imgSrc);
     });
     setTimeout(function () {
-        const imageNumbersToKeep = [1, 4, 7, 10];
-
-        $('.product').each(function() { 
-            var firstVariants = $(this).find('.product-variations-colors-content.primary').length
-            var secondVariants = $(this).find('.product-variations-fake-content.secondary').length
-
-            if(firstVariants <= 0 || secondVariants > 0 ){
-                $(this).find('.product-variations').css("background", "")
-            }
-            $(this).find('.product-variations-colors-picture').each(function(index) {
-                const imageNumberToKeep = imageNumbersToKeep[index];
+        $('.product-variations-colors-picture').each(function() {
+            const color = $(this).data('value'); 
     
-                if (imageNumberToKeep !== undefined) {
-                    $(this).find('img').each(function() {
-                        const imageNumber = $(this).data('image-number');
-                        if (imageNumber !== imageNumberToKeep) {
-                            $(this).remove();
-                        }
-                    });
+            $(this).find('img').each(function() {
+                if ($(this).data('relation') === color) {
+                    $(this).siblings('img').remove();
+                    return false;
+                } else {
+                    $(this).remove();
                 }
             });
         });
-    }, 1000)
+    }, 1000);
+    
     setTimeout(function(){
         const swiper = new Swiper('.swiper-container.carrossel', {
             slidesPerView: 4,
@@ -2545,5 +2536,23 @@
     } else {
         $("#menuVars .lista_cor_variacao .swiper-slide").css("width", "80px");
     }
+
+    function toggleSubmenu() {
+        if ($(window).width() <= 768) {
+            $("ul.first-level > li.sub > a").on("click", function(e) {
+                e.preventDefault();
+                $(this).siblings(".second-level").slideToggle();
+            });
+        } else {
+            $(".second-level").show();
+            $("ul.first-level > li.sub > a").off("click");
+        }
+    }
+
+    toggleSubmenu();
+
+    $(window).resize(function() {
+        toggleSubmenu();
+    });
     
 })(jQuery);

@@ -77,7 +77,7 @@
                                         <li data-value="{{ var.name }}" {{ var.id ? 'data-id="' ~ var.id ~ '"' : '' }}  class="product-variations-colors-picture swiper-slide">
 
                                                 {% for imagemVariant in product.variants %}
-                                                    <img class="product-variations-colors-img" src="{{ imagemVariant.images[0].small }}" data-image-number="{{ loop.index }}">
+                                                    <img class="product-variations-colors-img" src="{{ imagemVariant.images[0].small }}" data-relation="{{imagemVariant.Sku[0].value}}" data-image-number="{{ loop.index }}">
                                                 {% endfor %}
                                         </li>
                                     {% endfor %}
