@@ -112,8 +112,6 @@
                             {{ productHelper.variants() }}
                             <div class="imagens_variantes" style="display: none;">
                                 {% set displayed_ids = [] %}
-                                <pre>{{dump(product)}}</pre>
-
                                 {% for productVariants in product.variants %}
                                     {% for productColor in productVariants.Cor %}
                                         {% for productSku in productColor.sku %}
